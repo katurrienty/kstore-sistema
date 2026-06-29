@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { Package, ShoppingCart, DollarSign, LayoutGrid, Wallet, Users, Bike, Triangle, Zap, Rocket, Github, ClipboardList } from 'lucide-react';
 
 const modules = [
   {
     id: 'inventario',
-    icon: '📦',
+    icon: <Package size={20} />,
     title: 'Inventario',
     description: 'Control de stock, ajustes y alertas de mínimo',
     color: '#00d4aa',
@@ -15,7 +16,7 @@ const modules = [
   },
   {
     id: 'compras',
-    icon: '🛒',
+    icon: <ShoppingCart size={20} />,
     title: 'Compras',
     description: 'Registro de compras a proveedores con factura o guía',
     color: '#3b82f6',
@@ -24,7 +25,7 @@ const modules = [
   },
   {
     id: 'ventas',
-    icon: '💰',
+    icon: <DollarSign size={20} />,
     title: 'Ventas',
     description: 'Ventas con descuento automático de inventario',
     color: '#8b5cf6',
@@ -33,7 +34,7 @@ const modules = [
   },
   {
     id: 'catalogo',
-    icon: '📱',
+    icon: <LayoutGrid size={20} />,
     title: 'Catálogo',
     description: 'Fichas de productos compartibles con clientes',
     color: '#f59e0b',
@@ -42,7 +43,7 @@ const modules = [
   },
   {
     id: 'finanzas',
-    icon: '💵',
+    icon: <Wallet size={20} />,
     title: 'Finanzas',
     description: 'Caja, ingresos, egresos y reportes para el contador',
     color: '#10b981',
@@ -51,7 +52,7 @@ const modules = [
   },
   {
     id: 'usuarios',
-    icon: '👥',
+    icon: <Users size={20} />,
     title: 'Usuarios',
     description: 'Gestión de roles y permisos del equipo',
     color: '#ec4899',
@@ -61,10 +62,10 @@ const modules = [
 ];
 
 const stats = [
-  { label: 'Total Productos', value: '—', icon: '📦', color: '#00d4aa' },
-  { label: 'Ventas Hoy', value: '—', icon: '💰', color: '#8b5cf6' },
-  { label: 'Stock Bajo', value: '—', icon: '⚠️', color: '#f59e0b' },
-  { label: 'Saldo en Caja', value: '—', icon: '💵', color: '#10b981' },
+  { label: 'Total Productos', value: '—', icon: <Package size={24} />, color: '#00d4aa' },
+  { label: 'Ventas Hoy', value: '—', icon: <DollarSign size={24} />, color: '#8b5cf6' },
+  { label: 'Stock Bajo', value: '—', icon: <Triangle size={24} />, color: '#f59e0b' },
+  { label: 'Saldo en Caja', value: '—', icon: <Wallet size={24} />, color: '#10b981' },
 ];
 
 export default function Home() {
@@ -75,7 +76,7 @@ export default function Home() {
       {/* Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
-          <span className={styles.logoIcon}>🚲</span>
+          <span className={styles.logoIcon}><Bike size={28} /></span>
           <div>
             <div className={styles.logoTitle}>K-Store</div>
             <div className={styles.logoSub}>Sistema</div>
@@ -91,7 +92,7 @@ export default function Home() {
               className={`${styles.navItem} ${styles.navItemDisabled}`}
               title={`${mod.title} — ${mod.status}`}
             >
-              <span className={styles.navIcon}>{mod.icon}</span>
+              <span className={styles.navIcon} style={{ color: hoveredModule === mod.id ? mod.color : undefined }}>{mod.icon}</span>
               <span className={styles.navText}>{mod.title}</span>
               <span className={styles.navBadge} data-type={mod.statusType}>
                 {mod.statusType === 'dev' ? '🔧' : '📋'}
@@ -128,7 +129,7 @@ export default function Home() {
         <section className={styles.hero}>
           <div className={styles.heroGlow}></div>
           <div className={styles.heroContent}>
-            <div className={styles.heroBadge}>🚀 Bienvenido al sistema</div>
+            <div className={styles.heroBadge}><Rocket size={14} /> Bienvenido al sistema</div>
             <h2 className={styles.heroTitle}>
               K-Store <span className={styles.heroAccent}>Sistema</span>
             </h2>
@@ -139,7 +140,7 @@ export default function Home() {
           </div>
           <div className={styles.heroVisual}>
             <div className={styles.gearOuter}>
-              <div className={styles.gearInner}>🚲</div>
+              <div className={styles.gearInner}><Bike size={52} strokeWidth={1.5} /></div>
             </div>
           </div>
         </section>
@@ -148,7 +149,7 @@ export default function Home() {
         <section className={styles.statsGrid}>
           {stats.map((stat, i) => (
             <div key={i} className={styles.statCard} style={{ '--accent-color': stat.color }}>
-              <div className={styles.statIcon}>{stat.icon}</div>
+              <div className={styles.statIcon} style={{ color: stat.color }}>{stat.icon}</div>
               <div className={styles.statValue}>{stat.value}</div>
               <div className={styles.statLabel}>{stat.label}</div>
             </div>
@@ -171,7 +172,7 @@ export default function Home() {
                 onMouseLeave={() => setHoveredModule(null)}
               >
                 <div className={styles.moduleIconWrap}>
-                  <span className={styles.moduleIcon}>{mod.icon}</span>
+                  <span className={styles.moduleIcon} style={{ color: mod.color }}>{mod.icon}</span>
                 </div>
                 <div className={styles.moduleInfo}>
                   <div className={styles.moduleTitle}>{mod.title}</div>
@@ -195,11 +196,11 @@ export default function Home() {
           </div>
           <div className={styles.stackGrid}>
             {[
-              { name: 'Next.js', role: 'Frontend', icon: '▲' },
-              { name: 'Supabase', role: 'Base de datos', icon: '⚡' },
-              { name: 'Vercel', role: 'Deploy', icon: '🚀' },
-              { name: 'GitHub', role: 'Repositorio', icon: '🐙' },
-              { name: 'Linear', role: 'Gestión de tareas', icon: '📋' },
+              { name: 'Next.js', role: 'Frontend', icon: <Triangle size={18} fill="currentColor" /> },
+              { name: 'Supabase', role: 'Base de datos', icon: <Zap size={18} fill="currentColor" /> },
+              { name: 'Vercel', role: 'Deploy', icon: <Triangle size={18} fill="currentColor" /> },
+              { name: 'GitHub', role: 'Repositorio', icon: <Github size={18} /> },
+              { name: 'Linear', role: 'Gestión de tareas', icon: <ClipboardList size={18} /> },
             ].map((tech, i) => (
               <div key={i} className={styles.stackCard}>
                 <div className={styles.stackIcon}>{tech.icon}</div>
