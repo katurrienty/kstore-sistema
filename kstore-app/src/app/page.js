@@ -1,0 +1,215 @@
+'use client';
+
+import { useState } from 'react';
+import styles from './page.module.css';
+
+const modules = [
+  {
+    id: 'inventario',
+    icon: '📦',
+    title: 'Inventario',
+    description: 'Control de stock, ajustes y alertas de mínimo',
+    color: '#00d4aa',
+    status: 'En desarrollo',
+    statusType: 'dev',
+  },
+  {
+    id: 'compras',
+    icon: '🛒',
+    title: 'Compras',
+    description: 'Registro de compras a proveedores con factura o guía',
+    color: '#3b82f6',
+    status: 'En desarrollo',
+    statusType: 'dev',
+  },
+  {
+    id: 'ventas',
+    icon: '💰',
+    title: 'Ventas',
+    description: 'Ventas con descuento automático de inventario',
+    color: '#8b5cf6',
+    status: 'En desarrollo',
+    statusType: 'dev',
+  },
+  {
+    id: 'catalogo',
+    icon: '📱',
+    title: 'Catálogo',
+    description: 'Fichas de productos compartibles con clientes',
+    color: '#f59e0b',
+    status: 'En desarrollo',
+    statusType: 'dev',
+  },
+  {
+    id: 'finanzas',
+    icon: '💵',
+    title: 'Finanzas',
+    description: 'Caja, ingresos, egresos y reportes para el contador',
+    color: '#10b981',
+    status: 'En desarrollo',
+    statusType: 'dev',
+  },
+  {
+    id: 'usuarios',
+    icon: '👥',
+    title: 'Usuarios',
+    description: 'Gestión de roles y permisos del equipo',
+    color: '#ec4899',
+    status: 'Planificado',
+    statusType: 'planned',
+  },
+];
+
+const stats = [
+  { label: 'Total Productos', value: '—', icon: '📦', color: '#00d4aa' },
+  { label: 'Ventas Hoy', value: '—', icon: '💰', color: '#8b5cf6' },
+  { label: 'Stock Bajo', value: '—', icon: '⚠️', color: '#f59e0b' },
+  { label: 'Saldo en Caja', value: '—', icon: '💵', color: '#10b981' },
+];
+
+export default function Home() {
+  const [hoveredModule, setHoveredModule] = useState(null);
+
+  return (
+    <div className={styles.container}>
+      {/* Sidebar */}
+      <aside className={styles.sidebar}>
+        <div className={styles.logo}>
+          <span className={styles.logoIcon}>🚲</span>
+          <div>
+            <div className={styles.logoTitle}>K-Store</div>
+            <div className={styles.logoSub}>Sistema</div>
+          </div>
+        </div>
+
+        <nav className={styles.nav}>
+          <div className={styles.navLabel}>Módulos</div>
+          {modules.map((mod) => (
+            <a
+              key={mod.id}
+              href={`/${mod.id}`}
+              className={`${styles.navItem} ${styles.navItemDisabled}`}
+              title={`${mod.title} — ${mod.status}`}
+            >
+              <span className={styles.navIcon}>{mod.icon}</span>
+              <span className={styles.navText}>{mod.title}</span>
+              <span className={styles.navBadge} data-type={mod.statusType}>
+                {mod.statusType === 'dev' ? '🔧' : '📋'}
+              </span>
+            </a>
+          ))}
+        </nav>
+
+        <div className={styles.sidebarFooter}>
+          <div className={styles.versionBadge}>
+            <span className={styles.versionDot}></span>
+            v0.1.0 — Fase 1
+          </div>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main className={styles.main}>
+        {/* Top bar */}
+        <header className={styles.topbar}>
+          <div className={styles.topbarLeft}>
+            <h1 className={styles.pageTitle}>Dashboard</h1>
+            <span className={styles.pagePath}>/ Inicio</span>
+          </div>
+          <div className={styles.topbarRight}>
+            <div className={styles.statusPill}>
+              <span className={styles.statusDot}></span>
+              Sistema en configuración
+            </div>
+          </div>
+        </header>
+
+        {/* Hero welcome */}
+        <section className={styles.hero}>
+          <div className={styles.heroGlow}></div>
+          <div className={styles.heroContent}>
+            <div className={styles.heroBadge}>🚀 Bienvenido al sistema</div>
+            <h2 className={styles.heroTitle}>
+              K-Store <span className={styles.heroAccent}>Sistema</span>
+            </h2>
+            <p className={styles.heroDesc}>
+              Tu plataforma de administración para inventario, compras, ventas y reportes.
+              Los módulos se activarán a medida que avance el desarrollo.
+            </p>
+          </div>
+          <div className={styles.heroVisual}>
+            <div className={styles.gearOuter}>
+              <div className={styles.gearInner}>🚲</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section className={styles.statsGrid}>
+          {stats.map((stat, i) => (
+            <div key={i} className={styles.statCard} style={{ '--accent-color': stat.color }}>
+              <div className={styles.statIcon}>{stat.icon}</div>
+              <div className={styles.statValue}>{stat.value}</div>
+              <div className={styles.statLabel}>{stat.label}</div>
+            </div>
+          ))}
+        </section>
+
+        {/* Modules grid */}
+        <section className={styles.modulesSection}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>Módulos del Sistema</h3>
+            <span className={styles.sectionSub}>En desarrollo — aprobación por etapas</span>
+          </div>
+          <div className={styles.modulesGrid}>
+            {modules.map((mod) => (
+              <div
+                key={mod.id}
+                className={styles.moduleCard}
+                style={{ '--mod-color': mod.color }}
+                onMouseEnter={() => setHoveredModule(mod.id)}
+                onMouseLeave={() => setHoveredModule(null)}
+              >
+                <div className={styles.moduleIconWrap}>
+                  <span className={styles.moduleIcon}>{mod.icon}</span>
+                </div>
+                <div className={styles.moduleInfo}>
+                  <div className={styles.moduleTitle}>{mod.title}</div>
+                  <div className={styles.moduleDesc}>{mod.description}</div>
+                </div>
+                <div
+                  className={styles.moduleStatus}
+                  data-type={mod.statusType}
+                >
+                  {mod.status}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Stack info */}
+        <section className={styles.stackSection}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>Stack tecnológico</h3>
+          </div>
+          <div className={styles.stackGrid}>
+            {[
+              { name: 'Next.js', role: 'Frontend', icon: '▲' },
+              { name: 'Supabase', role: 'Base de datos', icon: '⚡' },
+              { name: 'Vercel', role: 'Deploy', icon: '🚀' },
+              { name: 'GitHub', role: 'Repositorio', icon: '🐙' },
+              { name: 'Linear', role: 'Gestión de tareas', icon: '📋' },
+            ].map((tech, i) => (
+              <div key={i} className={styles.stackCard}>
+                <div className={styles.stackIcon}>{tech.icon}</div>
+                <div className={styles.stackName}>{tech.name}</div>
+                <div className={styles.stackRole}>{tech.role}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
