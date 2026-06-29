@@ -50,6 +50,15 @@ CREATE TABLE movimientos_stock (
 );
 
 -- ========================================================================================
+-- BUCKET DE ALMACENAMIENTO PARA FOTOS
+-- ========================================================================================
+INSERT INTO storage.buckets (id, name, public) VALUES ('productos', 'productos', true) ON CONFLICT DO NOTHING;
+CREATE POLICY "Public Access" ON storage.objects FOR SELECT USING (bucket_id = 'productos');
+CREATE POLICY "Public Insert" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'productos');
+CREATE POLICY "Public Update" ON storage.objects FOR UPDATE USING (bucket_id = 'productos');
+CREATE POLICY "Public Delete" ON storage.objects FOR DELETE USING (bucket_id = 'productos');
+
+-- ========================================================================================
 -- POLÍTICAS RLS (Row Level Security) - MODO DESARROLLO
 -- (Permiten acceso total para la etapa de prototipado sin trabas)
 -- ========================================================================================
@@ -65,14 +74,20 @@ CREATE POLICY "Allow ALL on movimientos_stock" ON movimientos_stock FOR ALL USIN
 
 -- Insertar algunas categorías base
 INSERT INTO categorias (nombre, descripcion) VALUES 
-('Transmisión', 'Cadenas, piñones, descarriladores'),
-('Frenos', 'Pastillas, discos, líquidos, calipers'),
-('Ruedas', 'Llantas, rayos, mazas, cámaras'),
-('Accesorios', 'Luces, candados, caramañolas');
+('Transmisión', 'Cadenas, piñones, descarriladores') ON CONFLICT DO NOTHING;
+INSERT INTO categorias (nombre, descripcion) VALUES 
+('Frenos', 'Pastillas, discos, líquidos, calipers') ON CONFLICT DO NOTHING;
+INSERT INTO categorias (nombre, descripcion) VALUES 
+('Ruedas', 'Llantas, rayos, mazas, cámaras') ON CONFLICT DO NOTHING;
+INSERT INTO categorias (nombre, descripcion) VALUES 
+('Accesorios', 'Luces, candados, caramañolas') ON CONFLICT DO NOTHING;
 
 -- Insertar algunas marcas base
 INSERT INTO marcas (nombre) VALUES 
-('Shimano'),
-('SRAM'),
-('Maxxis'),
-('KMC');
+('Shimano') ON CONFLICT DO NOTHING;
+INSERT INTO marcas (nombre) VALUES 
+('SRAM') ON CONFLICT DO NOTHING;
+INSERT INTO marcas (nombre) VALUES 
+('Maxxis') ON CONFLICT DO NOTHING;
+INSERT INTO marcas (nombre) VALUES 
+('KMC') ON CONFLICT DO NOTHING;
