@@ -1,0 +1,163 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 32px;
+}
+
+.headerActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 320px;
+}
+
+.searchInput {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  margin-left: 8px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.btnPrimary:hover {
+  opacity: 0.9;
+}
+
+.btnSecondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btnSecondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tableContainer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background: var(--bg-secondary);
+  padding: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover {
+  background: var(--bg-card-hover);
+}
+
+.productName {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.productCode {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badgeGreen {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badgeYellow {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badgeRed {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.stockAlert {
+  color: #ef4444;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stockNormal {
+  color: var(--text-primary);
+  font-weight: 600;
+}
